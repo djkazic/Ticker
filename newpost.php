@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div class="container">
-			<h2>New Post</h2>
+			<h2>Ticker</h2>
 			<?php 
 				include('includes/db.php');
 				include('includes/functions.php');
