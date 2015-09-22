@@ -20,38 +20,44 @@
 		<div class="container">
 			<h2>Ticker</h2>
 			<?php 
+				include('header.php');
 				include('includes/db.php');
-				include('includes/functions.php');
-				renderNavBar(); 
 			?>
 			<hr>
 			
-			<div class="col-xs-9">
-				<div class="form-group" id="feedback">
+			<div class="row">
+				<div class="col-xs-12">
+				
 					<form action="newpost.php" method="post">
-						New Post:
-						<textarea class="form-control" id="newpost" type="text" rows="4"></textarea>
-						<br>
-						<input id="key" type="password" placeholder=" API key">
-						<br>
-						<input type="button" class="btn btn-success" name="submit" value="Submit"
-							onclick=
-							"var contents = $('#newpost').val();
-							var key = $('#key').val();
-							$.get('newpost.php?posttext=' + contents + '&key=' + key, 
-								function(data) {
-									//$('#newpost').val('');
-									$(location).attr('href', 'index.php');
-									//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
-								}
-							);"
-						>
+					<div class="form-group" id="feedback">
+							<b>New Post:</b>
+							<textarea class="form-control" id="newpost" type="text" rows="4"></textarea>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-6">
+					<input type="password" class="form-control" id="key" placeholder=" API key">
+					<br>
+					<input type="button" class="btn btn-success" name="submit" value="Submit"
+						onclick=
+						"var contents = $('#newpost').val();
+						var key = $('#key').val();
+						$.get('newpost.php?posttext=' + contents + '&key=' + key, 
+							function(data) {
+								//$('#newpost').val('');
+								$(location).attr('href', 'index.php');
+								//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
+							}
+						);"
+					>
 					</form>
 				</div>
 			</div>
 			
 			<?php
-				if(isset($_COOKIE['ticker_id']) && getId() != null && $_GET['key'] == 'narcosnchill') {
+				if(getId() != null && isset($_GET['key']) && $_GET['key'] == 'narcosnchill') {
 					if(isset($_GET['posttext'])) {
 						$timeStamp = time();
 						$timeRef = $timeStamp - 3600;
