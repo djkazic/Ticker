@@ -1,7 +1,7 @@
 <?php
 
-include('db.php');
-include('functions.php');
+include('includes/db.php');
+include('includes/functions.php');
 
 if(isset($_GET['post_id']) && isset($_GET['vote_val'])) {
 	$post_id = $_GET['post_id'];

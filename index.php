@@ -22,8 +22,8 @@
 			<h2>Ticker</h2>
 			<?php
 
-			include('db.php');
-			include('functions.php');
+			include('includes/db.php');
+			include('includes/functions.php');
 
 			//Check for existing ID from computer
 			if(isset($_COOKIE['ticker_id'])) {
