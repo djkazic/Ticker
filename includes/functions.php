@@ -2,7 +2,7 @@
 
 include('db.php');
 
-define(SECRET, "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs");
+define("SECRET", "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs");
 
 //Returns user ID or null
 function getId() {
@@ -11,7 +11,7 @@ function getId() {
 		$signature = $data[0];
 		$hash = $data[1];
 		$userId = $data[2];
-		if($signature !== sha1(SECRET. $hash . $userId)) {
+		if($signature !== sha1("SECRET". $hash . $userId)) {
 			//If corrupted or malformed cookie, delete
 			setcookie('ticker_id', "", time() - 3600);
 		} else {
@@ -25,25 +25,25 @@ function getId() {
 
 //Registers cookie into user system
 function register() {
+	echo "<h3>You've just been added to the Ticker family. Welcome!</h3> <BR>";
 	$idGen = time().uniqid();
-	$hash = sha1(rand(0, 500).microtime().SECRET);
-	$signature = sha1(SECRET . $hash . $idGen);
+	$hash = sha1(rand(0, 500).microtime()."SECRET");
+	$signature = sha1("SECRET" . $hash . $idGen);
 	setcookie('ticker_id', base64_encode($signature ."-". $hash ."-". $idGen), time() + (86400 + 30));
 	echo "<h4>Here's a recovery code, in case you mess up everything. <br>
 		 Take good care of this! If it's gone, so is your account... [";
 	echo base64_encode($signature ."-". $hash ."-". $idGen);
 	echo "]</h4>";
+	echo "</h3>Refresh the page to start using Ticker!</h3>";
 }
 
 //Displays normal feed (geo is assumed)
 function displayFeed() {
-	renderNavBar();
 	dbPullEntries();
 }
 
 //Displays personal feed (geo is assumed)
 function displayPersonalFeed() {
-	renderNavBar();
 	dbPullPersonalEntries();
 }
 
@@ -95,6 +95,7 @@ function renderNavBar() {
 			</div>
 		</nav>
 	";
+	//echo "Your ID is <i>".getId()."</i><BR>";
 }
 
 function dbPullEntries() {
