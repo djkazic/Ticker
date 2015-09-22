@@ -4,6 +4,7 @@ include('db.php');
 
 define(SECRET, "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs");
 
+//Returns user ID or null
 function getId() {
 	if(isset($_COOKIE['ticker_id'])) {
 		$data = explode('-', base64_decode($_COOKIE['ticker_id']));
@@ -22,27 +23,25 @@ function getId() {
 	return null;
 }
 
+//Registers cookie into user system
 function register() {
 	$idGen = time().uniqid();
-	//TODO: db check for uniqueness
-	//do { 
-	//$uniqueID = uniqid(); 
-	//$exists = mysql_num_rows('SELECT * FROM table WHERE id = $uniqueID');
-	//} while ($exists == 1)
 	$hash = sha1(rand(0, 500).microtime().SECRET);
 	$signature = sha1(SECRET . $hash . $idGen);
 	setcookie('ticker_id', base64_encode($signature ."-". $hash ."-". $idGen), time() + (86400 + 30));
-	echo "<h4>Here's a recovery code, in case you mess up everything. Keep good care of this! If it's gone, so is your account... [";
+	echo "<h4>Here's a recovery code, in case you mess up everything. <br>
+		 Take good care of this! If it's gone, so is your account... [";
 	echo base64_encode($signature ."-". $hash ."-". $idGen);
 	echo "]</h4>";
 }
 
+//Displays normal feed (geo is assumed)
 function displayFeed() {
-	//Render bar
 	renderNavBar();
 	dbPullEntries();
 }
 
+//Displays personal feed (geo is assumed)
 function displayPersonalFeed() {
 	renderNavBar();
 	dbPullPersonalEntries();
