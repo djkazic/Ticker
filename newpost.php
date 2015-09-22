@@ -31,7 +31,7 @@
 					<form action="newpost.php" method="post">
 					<div class="form-group" id="feedback">
 							<b>New Post:</b>
-							<textarea class="form-control" id="newpost" type="text" rows="4"></textarea>
+							<textarea class="form-control" id="newpost" type="text" rows="3" placeholder="What's on your mind?"></textarea>
 					</div>
 				</div>
 			</div>
