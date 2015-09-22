@@ -21,24 +21,10 @@
 		<div class="container" style="word-break: break-word">
 			<h2>Ticker</h2>
 			<?php
-
+			include('header.php');
 			include('includes/db.php');
-			include('includes/functions.php');
-
-			//Check for existing ID from computer
-			if(isset($_COOKIE['ticker_id'])) {
-				$userId = getId();
-				if($userId != null) {
-					echo "> debug: [".$userId."]<BR><BR>";
-					displayFeed();
-				} else {
-					die('You tried to mess with your cookie! Argh!');
-				}
-			} else {
-				echo "<h3>You've just been added to the Ticker family. Welcome!</h3> <BR>";
-				register();
-				echo "</h3>Refresh the page to start using Ticker!</h3>";
-			}
+					
+			displayFeed();
 			
 			?>
 		</div>

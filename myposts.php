@@ -19,24 +19,10 @@
 		<div class="container">
 			<h2>My Posts</h2>
 			<?php
-
+			include('header.php');
 			include('includes/db.php');
-			include('includes/functions.php');
 
-			//Check for existing ID from computer
-			if(isset($_COOKIE['ticker_id'])) {
-				$userId = getId();
-				if($userId != null) {
-					echo "Your ID is <i>".$userId."</i><BR><BR>";
-					displayPersonalFeed();
-				} else {
-					die('You tried to mess with your cookie! Argh!');
-				}
-			} else {
-				register();
-				echo "You've just been added to the Ticker family. Welcome! <BR>
-					  Refresh the page to see the feed.";
-			}
+			displayPersonalFeed();
 			
 			?>
 		</div>
