@@ -18,7 +18,7 @@
 		<title>Ticker</title>
 	</head>
 	<body>
-		<div class="container">
+		<div class="container" style="word-break: break-word">
 			<h2>Ticker</h2>
 			<?php
 
