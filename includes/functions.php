@@ -28,6 +28,9 @@ function register() {
 	$hash = sha1(rand(0, 500).microtime().SECRET);
 	$signature = sha1(SECRET . $hash . $idGen);
 	setcookie('ticker_id', base64_encode($signature ."-". $hash ."-". $idGen), time() + (86400 + 30));
+	echo "<h4>Here's a recovery code, in case you mess up everything. Keep good care of this! If it's gone, so is your account... [";
+	echo base64_encode($signature ."-". $hash ."-". $idGen);
+	echo "]</h4>";
 }
 
 function displayFeed() {

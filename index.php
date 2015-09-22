@@ -35,9 +35,9 @@
 					die('You tried to mess with your cookie! Argh!');
 				}
 			} else {
+				echo "<h3>You've just been added to the Ticker family. Welcome!</h3> <BR>";
 				register();
-				echo "<h3>You've just been added to the Ticker family. Welcome! <BR>
-					  Refresh the page to see the feed.</h3>";
+				echo "</h3>Refresh the page to start using Ticker!</h3>";
 			}
 			
 			?>
