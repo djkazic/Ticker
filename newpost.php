@@ -26,25 +26,28 @@
 			?>
 			<hr>
 			
-			<div class="form-group" id="feedback">
-				<form action="newpost.php" method="post">
-					<textarea class="form-control" id="newpost" type="text" placeholder=" What's on your mind?"></textarea>
-					<br>
-					<input id="key" type="password" placeholder=" API key">
-					<br>
-					<input type="button" class="btn btn-success" name="submit" value="Submit"
-						onclick=
-						"var contents = $('#newpost').val();
-						var key = $('#key').val();
-						$.get('newpost.php?posttext=' + contents + '&key=' + key, 
-							function(data) {
-								//$('#newpost').val('');
-								$(location).attr('href', 'index.php');
-								//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
-							}
-						);"
-					>
-				</form>
+			<div class="col-xs-9">
+				<div class="form-group" id="feedback">
+					<form action="newpost.php" method="post">
+						New Post:
+						<textarea class="form-control" id="newpost" type="text" rows="4"></textarea>
+						<br>
+						<input id="key" type="password" placeholder=" API key">
+						<br>
+						<input type="button" class="btn btn-success" name="submit" value="Submit"
+							onclick=
+							"var contents = $('#newpost').val();
+							var key = $('#key').val();
+							$.get('newpost.php?posttext=' + contents + '&key=' + key, 
+								function(data) {
+									//$('#newpost').val('');
+									$(location).attr('href', 'index.php');
+									//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
+								}
+							);"
+						>
+					</form>
+				</div>
 			</div>
 			
 			<?php
