@@ -5,15 +5,19 @@ include('db.php');
 define(SECRET, "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs");
 
 function getId() {
-	$data = explode('-', base64_decode($_COOKIE['ticker_id']));
-	$signature = $data[0];
-	$hash = $data[1];
-	$userId = $data[2];
-	if($signature !== sha1(SECRET. $hash . $userId)) {
-		setcookie('ticker_id', "", time() - 3600);
-	} else {
-		setcookie('ticker_id', $_COOKIE['ticker_id'], time() + (86400 + 30)); //Prevents expiry
-		return $userId;
+	if(isset($_COOKIE['ticker_id'])) {
+		$data = explode('-', base64_decode($_COOKIE['ticker_id']));
+		$signature = $data[0];
+		$hash = $data[1];
+		$userId = $data[2];
+		if($signature !== sha1(SECRET. $hash . $userId)) {
+			//If corrupted or malformed cookie, delete
+			setcookie('ticker_id', "", time() - 3600);
+		} else {
+			//Extend expiry
+			setcookie('ticker_id', $_COOKIE['ticker_id'], time() + (86400 + 30)); //Prevents expiry
+			return $userId;
+		}
 	}
 	return null;
 }
