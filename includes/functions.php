@@ -81,8 +81,8 @@ function renderNavBar() {
 					<ul class=\"nav navbar-nav navbar-right\">
 						<li class=\"dropdown\">
 							<a href=\"newpost.php\">
-								<i class=\"fa fa-plus-circle\"></i>
 								New Post
+								<i class=\"fa fa-plus-circle\" style=\"margin-left: 6px\"></i>
 								<span class=\"sr-only\">(current)</span>
 							</a>
 						</li>
