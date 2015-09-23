@@ -14,6 +14,22 @@
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js" crossorigin="anonymous"></script>
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
+		
+		<script>
+			$('#postForm').submit(function(event) {
+				event.preventDefault();
+				var contents = $('#newpost').val();
+				var key = $('#key').val();
+				$.get('newpost.php?posttext=' + contents + '&key=' + key, 
+					function(data) {
+						//$('#newpost').val('');
+						$(location).attr('href', 'feed.php');
+						//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
+					}
+				);
+			});
+		</script>
+		
 		<title>Create a Post</title>
 	</head>
 	<body>
@@ -27,7 +43,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 				
-					<form action="newpost.php" method="post">
+					<form id="postForm" action="newpost.php" method="post">
 					<div class="form-group" id="feedback">
 							<b>New Post:</b>
 							<textarea class="form-control" id="newpost" type="text" rows="3" placeholder="What's on your mind?"></textarea>
@@ -39,18 +55,7 @@
 				<div class="col-xs-6">
 					<input type="password" class="form-control" id="key" placeholder=" API key">
 					<br>
-					<input type="button" class="btn btn-success" name="submit" value="Submit"
-						onclick=
-						"var contents = $('#newpost').val();
-						var key = $('#key').val();
-						$.get('newpost.php?posttext=' + contents + '&key=' + key, 
-							function(data) {
-								//$('#newpost').val('');
-								$(location).attr('href', 'feed.php');
-								//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
-							}
-						);"
-					>
+					<input type="button" class="btn btn-success" name="submit" value="Submit">
 					</form>
 				</div>
 			</div>
