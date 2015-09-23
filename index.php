@@ -7,7 +7,7 @@
 		
 		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 		
-		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		
 		<link href="css/roboto.min.css" rel="stylesheet">
         	<link href="css/material.min.css" rel="stylesheet">
