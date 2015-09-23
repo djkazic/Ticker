@@ -16,7 +16,7 @@ if(getId() == null) {
 	//TODO: switch to localStorage
 	$(document).ready(function() {
 		if(navigator.geolocation) {
-			if(!$('#geoStat').is(":visible")) {
+			if($('#geoStat').is(":visible")) {
 				$('#geoStat').html("Crunching numbers for your location...");
 			}
 			navigator.geolocation.getCurrentPosition(success, error);
