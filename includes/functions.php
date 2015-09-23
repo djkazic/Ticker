@@ -6,6 +6,7 @@ $SECRET = "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs";
 
 //Returns user ID or null
 function getId() {
+	global $SECRET;
 	if(isset($_COOKIE['ticker_id'])) {
 		$data = explode('-', base64_decode($_COOKIE['ticker_id']));
 		$signature = $data[0];
@@ -25,6 +26,7 @@ function getId() {
 
 //Registers cookie into user system
 function register() {
+	global $SECRET;
 	echo "<h3>You've just been added to the Ticker family. Welcome!</h3> <BR>";
 	$idGen = time().uniqid();
 	$hash = sha1(rand(0, 500).microtime().$SECRET);
