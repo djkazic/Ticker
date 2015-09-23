@@ -16,9 +16,7 @@ if(getId() == null) {
 	//TODO: switch to localStorage
 	$(document).ready(function() {
 		if(navigator.geolocation) {
-			if($('#geoStat').is(":visible")) {
-				$('#geoStat').html("Crunching numbers for your location...");
-			}
+			$('#geoStat').html("<i class=\"fa fa-location-arrow\"></i><i class=\"fa fa-cog fa-spin\" style=\"margin-left: 5px\"></i><br>");
 			navigator.geolocation.getCurrentPosition(success, error);
 		} else {
 			$.post(
@@ -34,7 +32,7 @@ if(getId() == null) {
 			"geoupdate.php",
 			{lat: position.coords.latitude, long: position.coords.longitude},
 			function(data) {
-				$('#geoStat').hide();
+				$('#geoStat').html("<i class=\"fa fa-location-arrow\"><i class=\"fa fa-check-square\" style=\"margin-left: 5px\">");
 				setTimeout(function() {
 					if(document.URL.indexOf("#") == -1) {
 						url = document.URL + "#";
@@ -51,8 +49,6 @@ if(getId() == null) {
 	}
 </script>
 
-<div id="geoStat"></div>
-
 <?php
 //Geoloc check
 $uid = getId();
@@ -67,6 +63,7 @@ if($gcres->rowCount() > 0) {
 }
 
 renderNavBar();
+echo "<div id=\"geoStat\"></div>";
 echo "> debug: ".$uid;
 
 ?>
