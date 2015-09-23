@@ -19,7 +19,12 @@
 	</head>
 	<body>
 		<div class="container" style="word-break: break-word">
-			<h2>Ticker</h2>
+			<div class="row">
+				<div class="col-xs-12">
+					<h2 style="color: #000000; margin-left: 5px; margin-right: 5px"><img src="img/logo.svg" width="25" height="25" style="fill:#333333"></img>Ticker</h2>
+				</div>
+			</div>
+
 			<?php
 			include('header.php');
 			include('includes/db.php');
