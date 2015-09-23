@@ -20,7 +20,6 @@
 			<h2>My Posts</h2>
 			<?php
 			include('header.php');
-			include('includes/db.php');
 
 			displayPersonalFeed();
 			

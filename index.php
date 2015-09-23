@@ -29,7 +29,6 @@
 
 			<?php
 			include('header.php');
-			include('includes/db.php');
 					
 			displayFeed();
 			

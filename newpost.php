@@ -21,7 +21,6 @@
 			<h2>Ticker</h2>
 			<?php 
 				include('header.php');
-				include('includes/db.php');
 			?>
 			<hr>
 			
