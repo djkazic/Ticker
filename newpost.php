@@ -38,7 +38,7 @@
 			<?php 
 				include('header.php');
 			?>
-			<hr>
+			<br>
 			
 			<div class="row">
 				<div class="col-xs-12">
@@ -55,7 +55,7 @@
 				<div class="col-xs-6">
 					<input type="password" class="form-control" id="key" placeholder=" API key">
 					<br>
-					<input type="button" class="btn btn-success" name="submit" value="Submit">
+					<input type="submit" class="btn btn-success" name="submit" value="Submit">
 					</form>
 				</div>
 			</div>
