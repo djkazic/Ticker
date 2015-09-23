@@ -23,7 +23,7 @@
 			"geoupdate.php",
 			{lat: position.coords.latitude, long: position.coords.longitude},
 			function(data) {
-				$('#geoStat').html("");
+				$('#geoStat').hide();
 				setTimeout(function() {
 					if(document.URL.indexOf("#") == -1) {
 						url = document.URL + "#";
