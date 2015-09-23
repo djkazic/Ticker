@@ -35,9 +35,7 @@
 					"geoupdate.php",
 					{lat: position.coords.latitude, long: position.coords.longitude},
 					function(data, status) {
-						if(status == "success") {
-							window.location.replace("feed.php");
-						}
+						window.location.replace("feed.php");
 					}
 				);
 			}
