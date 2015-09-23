@@ -100,8 +100,26 @@ function renderNavBar() {
 
 function dbPullEntries() {
 	global $conn;
-	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' ORDER BY id DESC LIMIT 25");
-	renderEntries($res);
+	
+	$uid = getId();
+	$gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
+	$gcres->bindParam(":uid", $uid);
+	$gcres->execute();
+	if($gcres->rowCount() > 0) {
+		$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
+		$curLat = $grows[0]['latitude'];
+		$curLong = $grows[0]['longitude'];
+		
+		//Pulls geolocated posts within distance
+		$geoRes = $conn->prepare("SELECT * FROM posts 
+									WHERE active = '1' 
+									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 1.5");
+		$geoRes->bindParam(":curLat", $curLat);
+		$geoRes->bindParam(":curLong", $curLong);
+		renderEntries($geoRes);
+	}
+	//$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' ORDER BY id DESC LIMIT 25");
+	//renderEntries($res);
 }
 
 function dbPullPersonalEntries() {
