@@ -20,7 +20,9 @@ if(isset($_POST['lat']) && isset($_POST['long'])) {
 	$gres->bindParam(":uid", $userId);
 	$gres->bindParam(":lat", $_POST['lat']);
 	$gres->bindParam(":long", $_POST['long']);
-	$gres->execute();
+	if($gres->execute()) {
+		echo "OK";
+	}
 }
 
 ?>

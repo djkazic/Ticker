@@ -63,7 +63,7 @@ function renderNavBar() {
 				<div class=\"collapse navbar-collapse\" id=\"collapso\">
 					<ul class=\"nav navbar-nav navbar-left\" style=\"font-size: 15px\">
 						<li>
-							<a href=\"index.php\"}>
+							<a href=\"feed.php\"}>
 								Home
 								<span class=\"sr-only\">(current)</span>
 							</a>
