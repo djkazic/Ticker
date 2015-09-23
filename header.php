@@ -56,9 +56,11 @@ $uid = getId();
 $gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
 $gcres->bindParam(":uid", $uid);
 $gcres->execute();
-if($gcres->rowCount() == 0) {
-	die("<div id=\"dieMsg\">Sorry, we need geo-location services to work.</div>");
-	//NEED A LANDER PAGE WITHOUT A HEADER 
+if($gcres->rowCount() > 0) {
+	$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
+	if($grows[0]['lat'] == 0 || $grows[0]['long'] == 0) {
+		die("<div id=\"dieMsg\">Sorry, we need geo-location services to work.</div>");
+	}
 }
 
 renderNavBar();
