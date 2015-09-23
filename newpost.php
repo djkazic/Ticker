@@ -70,19 +70,23 @@
 							$gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
 							$gcres->bindParam(":uid", $userId);
 							$gcres->execute();
-							if($gcres->rowCount() > 0) {
-								$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
-								$curLat = $grows[0]['latitude'];
-								$curLong = $grows[0]['longitude'];
-								
-								$insertRes = $conn->prepare("INSERT INTO posts VALUES ('NULL', :postid, :content, :curLat, :curLong, :time, '1')");
-								$insertRes->bindParam(":postid", $userId);
-								$insertRes->bindParam(":content", $_GET['posttext']);
-								$insertRes->bindParam(":curLat", $curLat);
-								$insertRes->bindParam(":curLong", $curLong);
-								$insertRes->bindParam(":time", $timeStamp);
-								$insertRes->execute();
-							}							
+
+							$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
+							$curLat = $grows[0]['latitude'];
+							$curLong = $grows[0]['longitude'];
+							
+							$insertRes = $conn->prepare("INSERT INTO posts VALUES ('NULL', :postid, :content, :curLat, :curLong, :time, '1')");
+							$insertRes->bindParam(":postid", $userId);
+							$insertRes->bindParam(":content", $_GET['posttext']);
+							$insertRes->bindParam(":curLat", $curLat);
+							$insertRes->bindParam(":curLong", $curLong);
+							$insertRes->bindParam(":time", $timeStamp);
+							if(!$insertRes->execute()) {
+								echo "<pre>";
+								var_dump($conn->errorInfo());
+								echo "</pre>";
+								die();
+							}
 						}
 					}
 				}
