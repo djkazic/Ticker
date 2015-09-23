@@ -13,9 +13,9 @@
 				"geoupdate.php",
 				{lat: 0, long: 0}
 			);
-			$('#dieMsg').show();
 			alert('Your browser sucks. Upgrade it.');
 		}
+		$('#dieMsg').show();
 	});
 	
 	function success(position) {
