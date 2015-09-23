@@ -39,7 +39,10 @@
 					"geoupdate.php",
 					{lat: position.coords.latitude, long: position.coords.longitude},
 					function(data, status) {
-						window.location.replace("feed.php");
+						alert(status);
+						if(status == "OK") {
+							//window.location.replace("feed.php");
+						}
 					}
 				);
 			}

@@ -9,9 +9,6 @@ if(getId() == null) {
 	die();
 }
 
-?>
-
-<?php
 //Geoloc check
 $uid = getId();
 $gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
