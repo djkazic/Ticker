@@ -25,7 +25,10 @@
 				} else {
 					$.post(
 						"geoupdate.php",
-						{lat: 0, long: 0}
+						{lat: 0, long: 0},
+						function(data, status) {
+							window.location.replace("nogeo.php");
+						}
 					);
 				}
 				
@@ -42,7 +45,7 @@
 			}
 			
 			function error(error) {
-				document.getElementById('geo').innerHTML = 'Error: ' + error.message;
+				window.location.replace("nogeo.php");
 			}
 		</script>
 	</head>
@@ -59,7 +62,9 @@
 			renderNavBar(); 
 			?>
 			
-			One moment please, just need to figure out where you are...
+			<div id="currentMessage">
+				One moment please, just need to figure out where you are...
+			</div>
 		</div>
 	</body>
 </html>
