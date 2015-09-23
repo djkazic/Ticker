@@ -12,7 +12,7 @@ if(isset($_POST['lat']) && isset($_POST['long'])) {
 	$sres->execute();
 	if($sres->rowCount() > 0) {
 		//Update db
-		$gres = $conn->prepare("UPDATE geoloc SET lat = :lat, long = :long WHERE userid = :uid");
+		$gres = $conn->prepare("UPDATE geoloc SET lat = :lat, long = :long WHERE poster = :uid");
 	} else {
 		$gres = $conn->prepare("INSERT INTO geoloc VALUES ('NULL', :uid, :lat, :long)");
 	}
