@@ -15,18 +15,18 @@ if(getId() == null) {
 <script>
 	//TODO: switch to localStorage
 	$(document).ready(function() {
-		$('#dieMsg').hide();
 		if(navigator.geolocation) {
-			$('#geoStat').html("Crunching numbers for your location...");
+			if(!$('#geoStat').is(":visible")) {
+				$('#geoStat').html("Crunching numbers for your location...");
+			}
 			navigator.geolocation.getCurrentPosition(success, error);
 		} else {
 			$.post(
 				"geoupdate.php",
 				{lat: 0, long: 0}
 			);
-			alert('Your browser sucks. Upgrade it.');
 		}
-		$('#dieMsg').show();
+		
 	});
 	
 	function success(position) {
