@@ -57,7 +57,7 @@
 			</div>
 			
 			<?php
-				if(getId() != null && isset($_GET['key']) && $_GET['key'] == 'narcosnchill') {
+				if(getId() != null && isset($_GET['key']) && ($_GET['key'] == 'narcosnchill' || $_GET['key'] == 'bitch123cam')) {
 					if(isset($_GET['posttext'])) {
 						$timeStamp = time();
 						$timeRef = $timeStamp - 3600;
