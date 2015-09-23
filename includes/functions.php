@@ -226,7 +226,7 @@ function renderEntries($res) {
 				echo "</div>";
 			
 				echo "<div class=\"col-xs-9\" style=\"font-size: 16px; word-break: break-word\">";
-					echo $content;
+					echo htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 				echo "</div>";
 				
 			echo "</div>";	
