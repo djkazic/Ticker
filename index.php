@@ -27,7 +27,9 @@
 						"geoupdate.php",
 						{lat: 0, long: 0},
 						function(data, status) {
-							window.location.replace("nogeo.php");
+							if(status == "success") {
+								window.location.replace("feed.php");
+							}
 						}
 					);
 				}
@@ -39,9 +41,8 @@
 					"geoupdate.php",
 					{lat: position.coords.latitude, long: position.coords.longitude},
 					function(data, status) {
-						alert(status);
-						if(status == "OK") {
-							//window.location.replace("feed.php");
+						if(status == "success") {
+							window.location.replace("feed.php");
 						}
 					}
 				);
