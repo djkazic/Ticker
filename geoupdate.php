@@ -7,7 +7,7 @@ require('header.php');
 if(isset($_POST['lat']) && isset($_POST['long'])) {
 	//Look for existing record
 	$userId = getId();
-	$sres = $conn->prepare("SELECT * FROM geoloc WHERE userid = :uid");
+	$sres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
 	$sres->bindParam(":uid", $userId);
 	$sres->execute();
 	if($sres->rowCount() > 0) {
