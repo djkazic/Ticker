@@ -13,15 +13,17 @@ if(isset($_POST['lat']) && isset($_POST['long'])) {
 	$sres->execute();
 	if($sres->rowCount() > 0) {
 		//Update db
-		$gres = $conn->prepare("UPDATE geoloc SET lat = :lat, long = :long WHERE poster = :uid");
+		$gres = $conn->prepare("UPDATE geoloc SET lat = :lat, `long` = :long WHERE poster = :uid");
 	} else {
-		$gres = $conn->prepare("INSERT INTO geoloc VALUES ('NULL', :uid, :lat, :long)");
+		$gres = $conn->prepare("INSERT INTO geoloc VALUES ('NULL', :uid, :long, :lat)");
 	}
 	$gres->bindParam(":uid", $userId);
 	$gres->bindParam(":lat", $_POST['lat']);
 	$gres->bindParam(":long", $_POST['long']);
 	if($gres->execute()) {
 		echo "OK";
+	} else {
+		echo "ERR";
 	}
 }
 

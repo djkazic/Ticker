@@ -19,10 +19,7 @@ $gcres->bindParam(":uid", $uid);
 $gcres->execute();
 if($gcres->rowCount() > 0) {
 	$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
-	if($grows[0]['lat'] != 0 && $grows[0]['long'] != 0) {
-		//If direct access to feed fails, go to index
-		//All good
-	} else {
+	if($grows[0]['lat'] == 0 && $grows[0]['long'] == 0) {
 		header("Location: index.php");
 	}
 }
