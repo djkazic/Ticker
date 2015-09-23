@@ -1,5 +1,16 @@
 <!-- Header for geo cookie updates / header redirection if no cookies -->
 
+<?php
+require_once('includes/functions.php');
+
+//Cookie check
+if(getId() == null) {
+	register();
+	die();
+}
+
+?>
+
 <script src="js/geolocate.js"></script>
 <script>
 	//TODO: switch to localStorage
@@ -43,14 +54,6 @@
 <div id="geoStat"></div>
 
 <?php
-require_once('includes/functions.php');
-
-//Cookie check
-if(getId() == null) {
-	register();
-	die();
-}
-
 //Geoloc check
 $uid = getId();
 $gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
