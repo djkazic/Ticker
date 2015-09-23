@@ -19,6 +19,8 @@ if($gcres->rowCount() > 0) {
 	if($grows[0]['latitude'] == 0 && $grows[0]['longitude'] == 0) {
 		header("Location: index.php");
 	}
+} else {
+	header("Location: index.php");
 }
 
 renderNavBar();
