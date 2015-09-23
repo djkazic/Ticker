@@ -64,5 +64,6 @@ if($gcres->rowCount() > 0) {
 }
 
 renderNavBar();
+echo "> debug: ".$uid;
 
 ?>
