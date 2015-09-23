@@ -25,15 +25,9 @@
 				} else {
 					$.post(
 						"geoupdate.php",
-						{lat: 0, long: 0},
-						function(data, status) {
-							if(status == "success") {
-								window.location.replace("feed.php");
-							}
-						}
+						{lat: 0, long: 0}
 					);
 				}
-				
 			});
 			
 			function success(position) {
