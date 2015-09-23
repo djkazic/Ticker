@@ -7,6 +7,8 @@
 		
 		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
 		
+		<link rel="icon" href="favicon.ico" type="image/x-icon">
+		
 		<link href="css/roboto.min.css" rel="stylesheet">
         	<link href="css/material.min.css" rel="stylesheet">
         	<link href="css/ripples.min.css" rel="stylesheet">
@@ -21,7 +23,7 @@
 		<div class="container" style="word-break: break-word">
 			<div class="row">
 				<div class="col-xs-12">
-					<h2 style="color: #000000; margin-left: 5px; margin-right: 5px"><img src="img/logo.svg" width="25" height="25" style="fill:#333333"></img>Ticker</h2>
+					<h2 style="color: #000000; margin-left: 5px; margin-right: 10px"><img src="img/logo.svg" width="25" height="25" style="fill:#333333"></img>Ticker</h2>
 				</div>
 			</div>
 
