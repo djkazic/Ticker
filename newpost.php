@@ -19,11 +19,11 @@
 		<script>
 			$(document).ready(function() {
 				$('#key').bind('keydown', function(e) {
-					if (e.keyCode == 13) {
+					if(e.keyCode == 13) {
 						e.preventDefault();
 					}
 				});
-			}
+			});
 		</script>
 		
 		<title>Create a Post</title>
@@ -55,14 +55,9 @@
 					
 					var contents = $('#newpost').val();
 					var key = $('#key').val();
-					$.get('newpost.php?posttext=' + contents + '&key=' + key, 
-						function(data) {
-							//$('#newpost').val('');
-							$(location).attr('href', 'index.php');
-							//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
-						}
-					);
-					
+					$.get('newpost.php?posttext=' + contents + '&key=' + key', function() {
+						$(location).attr('href', 'index.php');
+					});
 					">
 					</form>
 				</div>
@@ -94,12 +89,7 @@
 							$insertRes->bindParam(":curLat", $curLat);
 							$insertRes->bindParam(":curLong", $curLong);
 							$insertRes->bindParam(":time", $timeStamp);
-							if(!$insertRes->execute()) {
-								echo "<pre>";
-								var_dump($conn->errorInfo());
-								echo "</pre>";
-								die();
-							}
+							$insertRes->execute();
 						}
 					}
 				}
