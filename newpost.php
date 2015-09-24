@@ -16,21 +16,6 @@
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 		
-		<script data-cfasync="false">
-			$('#postForm').submit(function(event) {
-				event.preventDefault();
-				var contents = $('#newpost').val();
-				var key = $('#key').val();
-				$.get('newpost.php?posttext=' + contents + '&key=' + key, 
-					function(data) {
-						//$('#newpost').val('');
-						$(location).attr('href', 'index.php');
-						//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
-					}
-				);
-			});
-		</script>
-		
 		<title>Create a Post</title>
 	</head>
 	<body>
@@ -56,7 +41,19 @@
 				<div class="col-xs-6">
 					<input type="password" class="form-control" id="key" placeholder=" API key">
 					<br>
-					<input type="submit" class="btn btn-success" name="submit" value="Submit">
+					<input type="submit" class="btn btn-success" name="submit" value="Submit" onclick="
+					
+					var contents = $('#newpost').val();
+					var key = $('#key').val();
+					$.get('newpost.php?posttext=' + contents + '&key=' + key, 
+						function(data) {
+							//$('#newpost').val('');
+							$(location).attr('href', 'index.php');
+							//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
+						}
+					);
+					
+					">
 					</form>
 				</div>
 			</div>
