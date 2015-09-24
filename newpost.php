@@ -24,7 +24,7 @@
 				$.get('newpost.php?posttext=' + contents + '&key=' + key, 
 					function(data) {
 						//$('#newpost').val('');
-						$(location).attr('href', 'feed.php');
+						$(location).attr('href', 'index.php');
 						//$('#feedback').html('<h3>Post successful!</h3><br><a href=\'index.php\' class=\'btn btn-default\'>Back to Feed</a>');
 					}
 				);
