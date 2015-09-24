@@ -65,7 +65,7 @@ function renderNavBar() {
 				<div class=\"collapse navbar-collapse\" id=\"collapso\">
 					<ul class=\"nav navbar-nav navbar-left\" style=\"font-size: 15px\">
 						<li>
-							<a href=\"feed.php\"}>
+							<a href=\"index.php\"}>
 								Home
 								<span class=\"sr-only\">(current)</span>
 							</a>
@@ -115,7 +115,7 @@ function dbPullEntries() {
 		//Pulls geolocated posts within distance
 		$geoRes = $conn->prepare("SELECT * FROM posts 
 									WHERE active = '1' 
-									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60");
+									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 25");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);

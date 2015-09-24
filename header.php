@@ -17,10 +17,10 @@ $gcres->execute();
 if($gcres->rowCount() > 0) {
 	$grows = $gcres->fetchAll(PDO::FETCH_ASSOC);
 	if($grows[0]['latitude'] == 0 && $grows[0]['longitude'] == 0) {
-		header("Location: index.php");
+		header("Location: getgeo.php");
 	}
 } else {
-	header("Location: index.php");
+	header("Location: getgeo.php");
 }
 
 renderNavBar();

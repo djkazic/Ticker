@@ -1,22 +1,50 @@
 <?php ob_start(); ?>
-<!-- Views posts -->
+<!-- Controller -->
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 		
 		<link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
-		
 		<link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
-		
 		<link href="css/roboto.min.css" rel="stylesheet">
         	<link href="css/material.min.css" rel="stylesheet">
         	<link href="css/ripples.min.css" rel="stylesheet">
+		
+		<title>Ticker</title>
 		
 		<script src="https://code.jquery.com/jquery-2.1.4.min.js" crossorigin="anonymous"></script>
 		
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 		
-		<title>Ticker</title>
+		<script>
+			//TODO: switch to localStorage
+			$(document).ready(function() {
+				if(navigator.geolocation) {
+					$('#geoStat').html("<i class=\"fa fa-location-arrow\"></i><i class=\"fa fa-cog fa-spin\" style=\"margin-left: 5px\"></i><br>");
+					navigator.geolocation.getCurrentPosition(success, error);
+				} else {
+					$.post(
+						"geoupdate.php",
+						{lat: 0, long: 0}
+					);
+				}
+			});
+			
+			function success(position) {
+				$.post(
+					"geoupdate.php",
+					{lat: position.coords.latitude, long: position.coords.longitude},
+					function(data, status) {
+						window.location.replace("index.php");
+					}
+				);
+			}
+			
+			function error(error) {
+				window.location.replace("nogeo.php");
+			}
+		</script>
 	</head>
 	<body>
 		<div class="container" style="word-break: break-word">
@@ -26,11 +54,14 @@
 				</div>
 			</div>
 
-			<?php
-			include('header.php');
-					
-			displayFeed();
+			<?php 
+			include('includes/functions.php');
+			renderNavBar(); 
 			?>
+			
+			<div id="currentMessage">
+				One moment please, just need to figure out where you are...
+			</div>
 		</div>
 	</body>
 </html>
