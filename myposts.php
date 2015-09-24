@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!-- Views posts -->
 <html>
 	<head>

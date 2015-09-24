@@ -1,3 +1,4 @@
+<?php ob_start(); ?>
 <!-- Views posts -->
 <html>
 	<head>
@@ -29,7 +30,6 @@
 			include('header.php');
 					
 			displayFeed();
-			
 			?>
 		</div>
 	</body>

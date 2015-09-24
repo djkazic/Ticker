@@ -1,7 +1,5 @@
-<!-- Send geolocation information -->
-
 <?php
-
+ob_start();
 require('includes/db.php');
 require('includes/functions.php');
 
