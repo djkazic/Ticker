@@ -27,7 +27,6 @@
 			</div>
 
 			<?php
-			include('securelock.php');
 			include('header.php');
 					
 			displayFeed();

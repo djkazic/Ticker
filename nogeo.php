@@ -20,8 +20,7 @@
 				</div>
 			</div>
 			
-			<?php
-			include('securelock.php');
+			<?php 
 			include('includes/functions.php');
 			renderNavBar(); 
 			?>

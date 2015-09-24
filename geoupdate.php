@@ -1,6 +1,5 @@
 <?php
 ob_start();
-include('securelock.php');
 require('includes/db.php');
 require('includes/functions.php');
 

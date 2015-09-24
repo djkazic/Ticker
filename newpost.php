@@ -36,8 +36,7 @@
 	<body>
 		<div class="container">
 			<h2>Ticker</h2>
-			<?php
-				include('securelock.php');
+			<?php 
 				include('header.php');
 			?>
 			<br>
