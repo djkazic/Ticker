@@ -1,4 +1,4 @@
-﻿<?php 
+<?php 
 include('secure.php');
 ?>
 <html>
