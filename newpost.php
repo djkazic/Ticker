@@ -34,11 +34,11 @@
 			<?php 
 				include('header.php');
 			?>
-			<br>
+			
+			<br><br>
 			
 			<div class="row">
 				<div class="col-xs-12">
-				
 					<form id="postForm" action="newpost.php" method="post">
 					<div class="form-group" id="feedback">
 							<b>New Post:</b>
@@ -55,7 +55,7 @@
 					
 					var contents = $('#newpost').val();
 					var key = $('#key').val();
-					$.get('newpost.php?posttext=' + contents + '&key=' + key', function() {
+					$.get('newpost.php?posttext=' + contents + '&key=' + key, function() {
 						$(location).attr('href', 'index.php');
 					});
 					">
