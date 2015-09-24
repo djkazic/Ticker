@@ -54,7 +54,8 @@
 				</div>
 			</div>
 
-			<?php 
+			<?php
+			include('securelock.php');
 			include('includes/functions.php');
 			renderNavBar(); 
 			?>

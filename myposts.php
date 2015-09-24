@@ -20,6 +20,7 @@
 		<div class="container">
 			<h2>My Posts</h2>
 			<?php
+			include('securelock.php');
 			include('header.php');
 
 			displayPersonalFeed();
