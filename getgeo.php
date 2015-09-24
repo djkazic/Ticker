@@ -22,7 +22,7 @@
 			$(document).ready(function() {
 				if(navigator.geolocation) {
 					$('#geoStat').html("<i class=\"fa fa-location-arrow\"></i><i class=\"fa fa-cog fa-spin\" style=\"margin-left: 5px\"></i><br>");
-					navigator.geolocation.getCurrentPosition(success, error);
+					navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true});
 				} else {
 					$.post(
 						"geoupdate.php",
