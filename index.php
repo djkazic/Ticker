@@ -25,7 +25,7 @@
 			var noMore = 0;
 			var now = new Date().getTime();
 			$(window).scroll(function() {
-				if((($(document).height() - $(window).height()) - $(window).scrollTop()) <= 4) {
+				if((($(document).height() - $(window).height()) - $(window).scrollTop()) <= 6) {
 					if(new Date().getTime() - now > 1000) {
 						$('#ajaxLoad').show();
 						var maxId = 0;
@@ -78,6 +78,8 @@
 				?>
 				<div id="ajaxLoad" class="text-center"><img src="img/loading-bars.svg" width="256" height="32"></div>
 			</div>
+			<br>
+			<br>
 		</div>
 	</body>
 </html>
