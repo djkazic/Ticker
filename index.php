@@ -34,7 +34,7 @@
 						url: "feeder.php",
 						data: {lastMin : minId},
 						success: function(html) {
-							$("#postswrapper").append(html);
+							$("#entries").append(html);
 							$('#loadmoreajaxloader').hide();
 						}
 					});
@@ -52,12 +52,14 @@
 					<h2 style="color: #000000; margin-left: 5px; margin-right: 10px"><img src="img/logo.svg" width="25" height="25" style="fill:#333333"></img>Ticker</h2>
 				</div>
 			</div>
-
+			
+			<div class="entries">
 			<?php
 			include('header.php');
 					
 			displayFeed();
 			?>
+			</div>
 		</div>
 	</body>
 </html>

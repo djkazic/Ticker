@@ -140,7 +140,6 @@ function dbPullPersonalEntries() {
 
 function renderEntries($res) {
 	global $conn;
-	echo "<div class=\"entries\">";
 	if($res->execute()) {
 		$rows = $res->fetchAll(PDO::FETCH_ASSOC);
 		if(sizeof($rows) == 0) {
@@ -259,7 +258,6 @@ function renderEntries($res) {
 		}
 		echo "<hr>";
 	}
-	echo "</div>";
 }
 
 ?>
