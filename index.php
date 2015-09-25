@@ -20,15 +20,15 @@
 			$(window).scroll(function() {
 				if($(window).scrollTop() == $(document).height() - $(window).height()){
 					$('#loadmoreajaxloader').show();			
-					var maxId = 0;
+					var minId = 0;
 					$(".entries *[id]").each(function() {
-						if(maxId < $(this).attr("id")){ maxId = $(this).attr("id")}
+						if(minId > $(this).attr("id")){ minId = $(this).attr("id")}
 					});
-					maxId = maxId.substring(3);
+					minId = minId.substring(3);
 					$.ajax({
 						method: "POST",
 						url: "feeder.php",
-						data: {lastMax : maxId},
+						data: {lastMin : minId},
 						success: function(html) {
 							$("#postswrapper").append(html);
 							$('#loadmoreajaxloader').hide();
