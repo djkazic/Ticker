@@ -49,13 +49,12 @@
 			
 			<div class="row">
 				<div class="col-xs-6">
-					<input type="password" class="form-control" id="key" placeholder=" API key">
 					<br>
 					<input type="submit" class="btn btn-success" name="submit" value="Submit" onclick="
 					
 					var contents = $('#newpost').val();
 					var key = $('#key').val();
-					$.get('newpost.php?posttext=' + contents + '&key=' + key, function() {
+					$.get('newpost.php?posttext=' + contents, function() {
 						$(location).attr('href', 'index.php');
 					});
 					">
@@ -64,7 +63,7 @@
 			</div>
 			
 			<?php
-				if(getId() != null && isset($_GET['key']) && ($_GET['key'] == 'narcosnchill' || $_GET['key'] == 'bitch123cam')) {
+				if(getId() != null) {
 					if(isset($_GET['posttext'])) {
 						$timeStamp = time();
 						$timeRef = $timeStamp - 3600;
