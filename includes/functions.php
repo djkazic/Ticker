@@ -221,7 +221,7 @@ function renderEntries($res) {
 					
 					echo "<div class=\"row\"><span class=\"badge\" id=\"score_$rid\" style=\"font-size: 14px\">$thisScore</span></div>";
 					echo 
-					"<div class=\"row\" id=\"dv_$rid\"><span class=\"glyphicon glyphicon-chevron-down\" aria-hidden='true' onclick=\"
+					"<div class=\"row\" id=\"dv_$rid\"><span class=\"glyphicon glyphicon-chevron-down\" aria-hidden='true' style=\"margin-top: 5px\" onclick=\"
 					$.ajax(
 						{url: 'op/vote.php?post_id=$rid&vote_val=-1',
 						 beforeSend: function() {
