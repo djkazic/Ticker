@@ -18,36 +18,42 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 		
 		<script type="text/javascript">
-			var noMore = 0;
+			$(document).ready(function() {
+				$('#ajaxLoad').hide();
+			});
 		
+			var noMore = 0;
+			var now = new Date().getTime();
 			$(window).scroll(function() {
 				if((($(document).height() - $(window).height()) - $(window).scrollTop()) <= 4) {
-					$('#loadmoreajaxloader').show();
-					var maxId = 0;
-					$(".entries *[id]").each(function() {
-						if(maxId < $(this).attr("id")){ maxId = $(this).attr("id")}
-					});
-					maxId = maxId.substring(3);			
-					var minId = maxId;
-					$(".entries *[id]").each(function() {
-						if(minId > $(this).attr("id")){ minId = $(this).attr("id")}
-					});
-					$.ajax({
-						method: "POST",
-						url: "feeder.php",
-						data: {lastMin : minId},
-						success: function(html) {
-							var oh = "<div class=\"row text-center\"><p>No posts are currently available :(</p></div>";
-							if(html == oh && noMore == 0) {
-								$("#entryContainer").append(html);
-								noMore = 1;
-							} else if(html != oh) {
-								$("#entryContainer").append(html);
+					if(new Date().getTime() - now > 1000) {
+						$('#ajaxLoad').show();
+						var maxId = 0;
+						$(".entries *[id]").each(function() {
+							if(maxId < $(this).attr("id")){ maxId = $(this).attr("id")}
+						});
+						maxId = maxId.substring(3);			
+						var minId = maxId;
+						$(".entries *[id]").each(function() {
+							if(minId > $(this).attr("id")){ minId = $(this).attr("id")}
+						});
+						$.ajax({
+							method: "POST",
+							url: "feeder.php",
+							data: {lastMin : minId},
+							success: function(html) {
+								var oh = "<div class=\"row text-center\"><p>No posts are currently available :(</p></div>";
+								if(noMore == 0 && html == oh) {
+									$("#entryContainer").append(html);
+									noMore = 1;
+								} else if(html != oh) {
+									$("#entryContainer").append(html);
+								}
+								$('#ajaxLoad').hide();
 							}
-							$('#loadmoreajaxloader').hide();
-						}
-					});
-					return;
+						});
+						now = new Date().getTime();
+					}
 				}
 			});
 		</script>
@@ -63,12 +69,14 @@
 			</div>
 			
 			<div class="entries" id="entryContainer">
-			
-			<?php
-			include('header.php');
-			echo "<hr>";	
-			displayFeed();
-			?>
+				<?php
+				include('header.php');
+				
+				echo "<hr>";	
+				displayFeed();
+				
+				?>
+				<div id="ajaxLoad" class="text-center"><img src="img/loading-bars.svg" width="256" height="32"></div>
 			</div>
 		</div>
 	</body>
