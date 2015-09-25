@@ -18,7 +18,7 @@
 		
 		<script type="text/javascript">
 			$(window).scroll(function() {
-				if($(window).scrollTop() == $(document).height() - $(window).height()) {
+				if($(window).scrollTop() + $(window).height() >= $(document).height() -300) {
 					$('#loadmoreajaxloader').show();			
 					var maxId = 0;
 					$(".entries *[id]").each(function() {
