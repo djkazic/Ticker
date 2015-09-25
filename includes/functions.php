@@ -40,8 +40,8 @@ function register() {
 }
 
 //Displays normal feed (geo is assumed)
-function displayFeed() {
-	dbPullEntries();
+function displayFeed($startId = 0) {
+	dbPullEntries($startId);
 }
 
 //Displays personal feed (geo is assumed)
@@ -100,7 +100,7 @@ function renderNavBar() {
 	//echo "Your ID is <i>".getId()."</i><BR>";
 }
 
-function dbPullEntries() {
+function dbPullEntries($startId) {
 	global $conn;
 	
 	$uid = getId();
@@ -113,11 +113,10 @@ function dbPullEntries() {
 		$curLong = $grows[0]['longitude'];
 		
 		//Pulls geolocated posts within distance
+		$endId = $startId + 15;
 		$geoRes = $conn->prepare("SELECT * FROM posts 
 									WHERE active = '1' 
-									AND ACOS(SIN(:curLat) * SIN(latitude) + 
-
-COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15");
+									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT $startId, $endId");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);
@@ -128,9 +127,7 @@ COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER B
 
 function dbPullPersonalEntries() {
 	global $conn;
-	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 
-
-15");
+	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 15");
 	$id = getId();
 	$res->bindParam(":poster", $id);
 	renderEntries($res);
