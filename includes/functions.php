@@ -115,7 +115,7 @@ function dbPullEntries() {
 		//Pulls geolocated posts within distance
 		$geoRes = $conn->prepare("SELECT * FROM posts 
 									WHERE active = '1' 
-									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 25");
+									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);
@@ -126,7 +126,7 @@ function dbPullEntries() {
 
 function dbPullPersonalEntries() {
 	global $conn;
-	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 25");
+	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 15");
 	$id = getId();
 	$res->bindParam(":poster", $id);
 	renderEntries($res);
