@@ -21,7 +21,7 @@
 			var noMore = 0;
 		
 			$(window).scroll(function() {
-				if((($(document).height() - $(window).height()) - $(window).scrollTop()) < 20) {
+				if((($(document).height() - $(window).height()) - $(window).scrollTop()) <= 4) {
 					$('#loadmoreajaxloader').show();
 					var maxId = 0;
 					$(".entries *[id]").each(function() {
