@@ -22,6 +22,7 @@
 			<?php
 			include('header.php');
 
+			echo "<hr>";
 			displayPersonalFeed();
 			
 			?>
