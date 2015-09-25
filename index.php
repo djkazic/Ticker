@@ -1,5 +1,6 @@
 <?php ob_start(); ?>
 <!-- Views posts -->
+<!DOCTYPE HTML>
 <html>
 	<head>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,7 +21,7 @@
 			var noMore = 0;
 		
 			$(window).scroll(function() {
-				if(($(window).scrollTop() + 675) == $(document).height()) {
+				if((($(document).height() - $(window).height()) - $(window).scrollTop()) < 20) {
 					$('#loadmoreajaxloader').show();
 					var maxId = 0;
 					$(".entries *[id]").each(function() {
