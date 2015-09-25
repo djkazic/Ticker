@@ -27,7 +27,7 @@
 					maxId = maxId.substring(3);
 					$.ajax({
 						method: "POST",
-						url: "loadmore.php",
+						url: "feeder.php",
 						data: {lastMax : maxId},
 						success: function(html) {
 							$("#postswrapper").append(html);
