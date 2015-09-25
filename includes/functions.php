@@ -40,8 +40,8 @@ function register() {
 }
 
 //Displays normal feed (geo is assumed)
-function displayFeed($startId = 0, $feeder = false) {
-	dbPullEntries($startId, $feeder);
+function displayFeed($startId = 0) {
+	dbPullEntries($startId);
 }
 
 //Displays personal feed (geo is assumed)
@@ -100,8 +100,14 @@ function renderNavBar() {
 	//echo "Your ID is <i>".getId()."</i><BR>";
 }
 
-function dbPullEntries($startId, $feeder) {
+function dbPullEntries($startId) {
 	global $conn;
+	
+	if($startId != 0) {
+		$dbAdd = " OFFSET $startId";
+	} else {
+		$dbAdd = "";
+	}
 	
 	$uid = getId();
 	$gcres = $conn->prepare("SELECT * FROM geoloc WHERE poster = :uid");
@@ -112,15 +118,10 @@ function dbPullEntries($startId, $feeder) {
 		$curLat = $grows[0]['latitude'];
 		$curLong = $grows[0]['longitude'];
 		
-		$ordStr = "";
-		if($feeder) {
-			$ordStr = "AND id < $startId";
-		}
-		
 		//Pulls geolocated posts within distance
 		$geoRes = $conn->prepare("SELECT * FROM posts 
-									WHERE active = '1' $ordStr AND 
-									ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15 OFFSET $startId");
+									WHERE active = '1' AND 
+									ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15 $dbAdd");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);
