@@ -76,12 +76,6 @@ function renderNavBar() {
 								<span class=\"sr-only\">(current)</span>
 							</a>
 						</li>
-						<li>
-							<a href=\"#\">
-								FAQ
-								<span class=\"sr-only\">(current)</span>
-							</a>
-						</li>
 					</ul>
 					<ul class=\"nav navbar-nav navbar-right\">
 						<li class=\"dropdown\">
@@ -256,7 +250,7 @@ function renderEntries($res) {
 					echo htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 				echo "</div>";
 			echo "</div>";
-			echo "<hr>";			
+			echo "<br><br>";	
 		}
 	}
 }
