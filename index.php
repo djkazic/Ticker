@@ -17,6 +17,8 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha256-Sk3nkD6mLTMOF0EOpNtsIry+s1CsaqQC1rVLTAy+0yc= sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 		
 		<script type="text/javascript">
+			var noMore = 0;
+		
 			$(window).scroll(function() {
 				if(($(window).scrollTop() + 675) == $(document).height()) {
 					$('#loadmoreajaxloader').show();
@@ -34,7 +36,13 @@
 						url: "feeder.php",
 						data: {lastMin : minId},
 						success: function(html) {
-							$("#entries").append(html);
+							var oh = "<div class=\"row text-center\"><p>No posts are currently available :(</p></div>";
+							if(html == oh && noMore == 0) {
+								$("#entryContainer").append(html);
+								noMore = 1;
+							} else if(html != oh) {
+								$("#entryContainer").append(html);
+							}
 							$('#loadmoreajaxloader').hide();
 						}
 					});
@@ -53,10 +61,11 @@
 				</div>
 			</div>
 			
-			<div class="entries">
+			<div class="entries" id="entryContainer">
+			
 			<?php
 			include('header.php');
-					
+			echo "<hr>";	
 			displayFeed();
 			?>
 			</div>
