@@ -55,7 +55,7 @@ function renderNavBar() {
 		<nav class=\"navbar navbar-default\" style=\"margin-bottom: 3px\">
 			<div class=\"container-fluid\">
 				<div class=\"navbar-header\">
-					<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" 			data-target=\"#collapso\" aria-expanded=\"false\">
+					<button type=\"button\" class=\"navbar-toggle collapsed\" data-toggle=\"collapse\" data-target=\"#collapso\" aria-expanded=\"false\">
 						<span class=\"sr-only\">Toggle navigation</span>
 						<span class=\"icon-bar\"></span>
 						<span class=\"icon-bar\"></span>
@@ -115,18 +115,22 @@ function dbPullEntries() {
 		//Pulls geolocated posts within distance
 		$geoRes = $conn->prepare("SELECT * FROM posts 
 									WHERE active = '1' 
-									AND ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15");
+									AND ACOS(SIN(:curLat) * SIN(latitude) + 
+
+COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);
 	}
-	//$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' ORDER BY id DESC LIMIT 25");
+	//$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' ORDER BY id DESC LIMIT 15");
 	//renderEntries($res);
 }
 
 function dbPullPersonalEntries() {
 	global $conn;
-	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 15");
+	$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' AND poster = :poster ORDER BY id DESC LIMIT 
+
+15");
 	$id = getId();
 	$res->bindParam(":poster", $id);
 	renderEntries($res);
@@ -134,7 +138,7 @@ function dbPullPersonalEntries() {
 
 function renderEntries($res) {
 	global $conn;
-	//echo "<div class=\"container\">";
+	echo "<div class=\"entries\">";
 	if($res->execute()) {
 		$rows = $res->fetchAll(PDO::FETCH_ASSOC);
 		if(sizeof($rows) == 0) {
@@ -191,7 +195,7 @@ function renderEntries($res) {
 			}
 			
 			echo "<hr>";
-			echo "<div class=\"row\">";
+			echo "<div class=\"row\" id=\"$rid\">";
 				echo "<div class=\"col-xs-1 text-center\" style=\"padding-left:35px\">";
 					echo 
 					"<div class=\"row\" id=\"uv_$rid\"><span class=\"glyphicon glyphicon-chevron-up\" aria-hidden='true' onclick=\"
@@ -253,6 +257,7 @@ function renderEntries($res) {
 		}
 		echo "<hr>";
 	}
+	echo "</div>";
 }
 
 ?>
