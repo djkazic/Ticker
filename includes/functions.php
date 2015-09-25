@@ -103,10 +103,13 @@ function renderNavBar() {
 function dbPullEntries($startId) {
 	global $conn;
 	
+	$dbAdd = "";
+	$auxAdd = "";
+	
 	if($startId != 0) {
-		$dbAdd = " OFFSET $startId";
+		$auxAdd = "id < $startId AND";
 	} else {
-		$dbAdd = "";
+		$dbAdd = "LIMIT 15";
 	}
 	
 	$uid = getId();
@@ -120,8 +123,8 @@ function dbPullEntries($startId) {
 		
 		//Pulls geolocated posts within distance
 		$geoRes = $conn->prepare("SELECT * FROM posts 
-									WHERE active = '1' AND 
-									ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC LIMIT 15 $dbAdd");
+									WHERE active = '1' AND $auxAdd  
+									ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC $dbAdd");
 		$geoRes->bindParam(":curLat", $curLat);
 		$geoRes->bindParam(":curLong", $curLong);
 		renderEntries($geoRes);
@@ -195,7 +198,6 @@ function renderEntries($res) {
 				$dres->execute();
 			}
 			
-			echo "<hr>";
 			echo "<div class=\"row\" id=\"$rid\">";
 				echo "<div class=\"col-xs-1 text-center\" style=\"padding-left:35px\">";
 					echo 
@@ -253,10 +255,9 @@ function renderEntries($res) {
 				echo "<div class=\"col-xs-9\" style=\"font-size: 16px; word-break: break-word\">";
 					echo htmlspecialchars($content, ENT_QUOTES, 'UTF-8');
 				echo "</div>";
-				
-			echo "</div>";	
+			echo "</div>";
+			echo "<hr>";			
 		}
-		echo "<hr>";
 	}
 }
 
