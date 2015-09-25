@@ -1,4 +1,17 @@
-<?php ob_start(); ?>
+<?php 
+ob_start(); 
+include('../includes/functions.php');
+
+if(isset($_POST['admUser']) && isset($_POST['admPassword'])) {
+	if(adminAuth($_POST['admUser'], $_POST['admPassword'])) {
+		session_start();
+		$_SESSION['username'] = $_POST['admUser'];
+		$_SESSION['status'] = "Active";
+		header("Location: index.php");
+	}
+}
+?>
+
 <html>
 
 <head>
@@ -11,8 +24,11 @@
 	<![endif]-->
     <title>Ticker | Admin Auth</title>
     <link href="../css/bootstrap/css/bootstrap.css" rel="stylesheet" />
+	<link href="../css/roboto.min.css" rel="stylesheet">
+	<link href="../css/material.min.css" rel="stylesheet">
+	<link href="../css/ripples.min.css" rel="stylesheet">
     <link href="../css/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
+	
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -26,24 +42,19 @@
     <!-- MENU SECTION END-->
     <div class="content-wrapper">
         <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <h4 class="page-head-line">Central Dogma </h4>
-
-                </div>
-
-            </div>
+			<br> <br> <br>
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
                     <h4><strong>> admin panel access:</strong></h4>
-                    <form action="login.php" method="post">
+					<hr>
+                    <form action="" method="post">
                         <label>username : </label>
-                        <input type="text" class="form-control" id="user" />
+                        <input type="text" class="form-control" id="admUser" name="admUser" />
                         <label>password : </label>
-                        <input type="password" class="form-control" id="password" />
+                        <input type="password" class="form-control" id="admPassword" name="admPassword" />
                         <hr>
-                        <button type="submit" class="btn btn-info"> Enter </button>
+                        <input type="submit" class="btn btn-info">
                     </form>
                     <br />
                 </div>

@@ -4,6 +4,22 @@ include('db.php');
 
 $SECRET = "ah95Kovtc0Zwm9Snhze3IYG5fr6SsggfwGFkFdGKGOE4Edodf7sDWs";
 
+//Authenticates admin
+function adminAuth($user, $password) {
+	global $conn;
+	$password = sha1($password);
+	$authRes = $conn->prepare("SELECT * FROM admins WHERE username = :user AND password = :hash");
+	$authRes->bindParam(":user", $user);
+	$authRes->bindParam(":hash", $password);
+	$authRes->execute();
+	if($authRes->rowCount() == 1) {
+		return true;
+	} else {
+		echo "ROWCOUNT".$authRes->rowCount();
+	}
+	return false;
+}
+
 //Returns user ID or null
 function getId() {
 	global $SECRET;
