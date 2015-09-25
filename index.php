@@ -19,12 +19,16 @@
 		<script type="text/javascript">
 			$(window).scroll(function() {
 				if($(window).scrollTop() == $(document).height() - $(window).height()){
-					$('#loadmoreajaxloader').show();			
-					var minId = 0;
+					$('#loadmoreajaxloader').show();
+					var maxId = 0;
+					$(".entries *[id]").each(function() {
+						if(maxId < $(this).attr("id")){ maxId = $(this).attr("id")}
+					});
+					maxId = maxId.substring(3);			
+					var minId = maxId;
 					$(".entries *[id]").each(function() {
 						if(minId > $(this).attr("id")){ minId = $(this).attr("id")}
 					});
-					minId = minId.substring(3);
 					$.ajax({
 						method: "POST",
 						url: "feeder.php",
