@@ -196,7 +196,7 @@ function renderEntries($res) {
 					echo 
 					"<div class=\"row\" id=\"uv_$rid\"><span class=\"glyphicon glyphicon-chevron-up\" aria-hidden='true' onclick=\"
 					$.ajax(
-						{url: 'vote.php?post_id=$rid&vote_val=1',
+						{url: 'op/vote.php?post_id=$rid&vote_val=1',
 						 beforeSend: function() {
 							if($('#uv_$rid').css('color') != 'rgb(0, 150, 136)') {
 								if($('#dv_$rid').css('color') == 'rgb(0, 150, 136)') {
@@ -211,7 +211,7 @@ function renderEntries($res) {
 								$('#uv_$rid').css('color', 'black');
 								$('#dv_$rid').css('color', 'black');
 								$('#score_$rid').html(parseInt($('#score_$rid').html(), 10) - 1);
-								$.get('vote.php?post_id=$rid&vote_val=0');
+								$.get('op/vote.php?post_id=$rid&vote_val=0');
 							}
 						}}
 					);
@@ -222,7 +222,7 @@ function renderEntries($res) {
 					echo 
 					"<div class=\"row\" id=\"dv_$rid\"><span class=\"glyphicon glyphicon-chevron-down\" aria-hidden='true' onclick=\"
 					$.ajax(
-						{url: 'vote.php?post_id=$rid&vote_val=-1',
+						{url: 'op/vote.php?post_id=$rid&vote_val=-1',
 						 beforeSend: function() {
 							if($('#dv_$rid').css('color') != 'rgb(0, 150, 136)') {
 								if($('#uv_$rid').css('color') == 'rgb(0, 150, 136)') {
@@ -237,7 +237,7 @@ function renderEntries($res) {
 								$('#uv_$rid').css('color', 'black');
 								$('#dv_$rid').css('color', 'black');
 								$('#score_$rid').html(parseInt($('#score_$rid').html(), 10) + 1);
-								$.get('vote.php?post_id=$rid&vote_val=0');
+								$.get('op/vote.php?post_id=$rid&vote_val=0');
 							}
 						 }}
 					); 

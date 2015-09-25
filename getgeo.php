@@ -25,7 +25,7 @@
 					navigator.geolocation.getCurrentPosition(success, error, {enableHighAccuracy: true});
 				} else {
 					$.post(
-						"geoupdate.php",
+						"op/geoupdate.php",
 						{lat: 0, long: 0}
 					);
 				}
@@ -33,7 +33,7 @@
 			
 			function success(position) {
 				$.post(
-					"geoupdate.php",
+					"op/geoupdate.php",
 					{lat: position.coords.latitude, long: position.coords.longitude},
 					function(data, status) {
 						window.location.replace("index.php");

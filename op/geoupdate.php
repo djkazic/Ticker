@@ -1,7 +1,7 @@
 <?php
 ob_start();
-require('includes/db.php');
-require('includes/functions.php');
+require('../includes/db.php');
+require('../includes/functions.php');
 
 if(isset($_POST['lat']) && isset($_POST['long'])) {
 	//Look for existing record
