@@ -72,17 +72,12 @@ include('secure.php');
                                 <ul>
 									<?php
 									ob_start();
-									echo "Test echo";
+									include('../includes/functions.php');
+									
+									displayModerationFeed();
 									//DB code to generate based on entry
 									//Link leads to operator that performs action
 									?>
-                                    <li>
-                                        <a href="#">
-                                            <span class="glyphicon glyphicon-ok" style="margin-right: 2px"></span>
-                                            <span class="glyphicon glyphicon-remove" style="margin-left: 2px; margin-right: 5px"></span> Some post here.
-                                        </a>
-                                    </li>
-									
                                 </ul>
                             </div>
                         </div>
