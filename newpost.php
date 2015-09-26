@@ -50,7 +50,7 @@
 			<div class="row">
 				<div class="col-xs-6">
 					<br>
-					<input type="submit" class="btn btn-success" name="submit" value="Submit" onclick="
+					<input type="button" class="btn btn-success" name="submit" value="Submit" onclick="
 					
 					var contents = $('#newpost').val();
 					var key = $('#key').val();
