@@ -60,6 +60,10 @@ function displayFeed($startId = 0) {
 	dbPullEntries($startId);
 }
 
+function displayModerationFeed() {
+	dbPullEntries(-1);
+}
+
 //Displays personal feed (geo is assumed)
 function displayPersonalFeed() {
 	dbPullPersonalEntries();
@@ -116,7 +120,7 @@ function dbPullEntries($startId) {
 	$dbAdd = "";
 	$auxAdd = "";
 	
-	if($startId != 0) {
+	if($startId > 0) {
 		$auxAdd = "id < $startId AND";
 	} else {
 		$dbAdd = "LIMIT 15";
@@ -135,9 +139,16 @@ function dbPullEntries($startId) {
 		$geoRes = $conn->prepare("SELECT * FROM posts 
 									WHERE active = '1' AND $auxAdd  
 									ACOS(SIN(:curLat) * SIN(latitude) + COS(:curLat) * COS(latitude) * COS(longitude - (:curLong))) * 6371 <= 60 ORDER BY id DESC $dbAdd");
-		$geoRes->bindParam(":curLat", $curLat);
-		$geoRes->bindParam(":curLong", $curLong);
-		renderEntries($geoRes);
+		
+		//If is moderation pull
+		if($startId == -1) {
+			$geoRes = $conn->prepare("SELECT * FROM posts ORDER BY id DESC LIMIT 15");
+			renderModEntries($geoRes);
+		} else {
+			$geoRes->bindParam(":curLat", $curLat);
+			$geoRes->bindParam(":curLong", $curLong);
+			renderEntries($geoRes);
+		}		
 	}
 	//$res = $conn->prepare("SELECT * FROM posts WHERE active = '1' ORDER BY id DESC LIMIT 15");
 	//renderEntries($res);
@@ -149,6 +160,28 @@ function dbPullPersonalEntries() {
 	$id = getId();
 	$res->bindParam(":poster", $id);
 	renderEntries($res);
+}
+
+function renderModEntries($res) {
+	global $conn;
+	if($res->execute()) {
+		$rows = $res->fetchAll(PDO::FETCH_ASSOC);
+		if(sizeof($rows) == 0) {
+			echo "<div class=\"row text-center\">";
+				echo "<p>No posts are currently available :(</p>";
+			echo "</div>";
+			return;
+		}
+		foreach($rows as $row) {
+			echo "<li>";
+				echo "<a href=\"#\">";
+					echo "<span class=\"glyphicon glyphicon-ok\" style=\"margin-right: 1px\"></span>
+                          <span class=\"glyphicon glyphicon-remove\" style=\"margin-left: 1px; margin-right: 10px\"></span>";
+					echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8');
+				echo "</a>";
+			echo "</li>";
+		}
+	}
 }
 
 function renderEntries($res) {
