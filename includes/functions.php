@@ -168,15 +168,37 @@ function renderModEntries($res) {
 		$rows = $res->fetchAll(PDO::FETCH_ASSOC);
 		if(sizeof($rows) == 0) {
 			echo "<div class=\"row text-center\">";
-				echo "<p>No posts are currently available :(</p>";
+				echo "<p>No more posts :(</p>";
 			echo "</div>";
 			return;
 		}
 		foreach($rows as $row) {
-			echo "<li>";
-				echo "<a href=\"#\">";
-					echo "<span class=\"glyphicon glyphicon-ok\" style=\"margin-right: 1px\"></span>
-                          <span class=\"glyphicon glyphicon-remove\" style=\"margin-left: 1px; margin-right: 10px\"></span>";
+			$rid = $row['id'];
+			echo "<li id=\"queue_$rid\">";
+				echo "<a href=\"\">";
+					echo "<span class=\"glyphicon glyphicon-ok\" style=\"margin-right: 1px\" onclick=\"
+							$('#queue_$rid').hide();
+							$.ajax(
+								{url: 'op/modexec.php',
+							    data: {post_id: $rid, move: 1},
+								success: function(data) {
+									alert(data);
+									$('#queue_$rid').hide(); //Not working bc db.php and reload
+								}
+							});
+						  \"></span>
+						  
+						  
+                          <span class=\"glyphicon glyphicon-remove\" style=\"margin-left: 1px; margin-right: 10px\" onclick=\"
+							$.ajax(
+								'op/modexec.php',
+								{post_id: $rid, move: -1},
+								function(data) {
+									alert(data);
+									$('#queue_$rid').hide();
+								}
+							);
+						  \"></span>";
 					echo htmlspecialchars($row['content'], ENT_QUOTES, 'UTF-8');
 				echo "</a>";
 			echo "</li>";
