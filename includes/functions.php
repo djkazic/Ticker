@@ -49,9 +49,9 @@ function register() {
 	$signature = sha1($SECRET . $hash . $idGen);
 	setcookie('ticker_id', base64_encode($signature ."-". $hash ."-". $idGen), time() + (86400 + 30));
 	echo "<h4>Here's a recovery code, in case you mess up everything. <br>
-		 Take good care of this! If it's gone, so is your account... [";
+		 Take good care of this! If it's gone, so is your account... <pre>[";
 	echo base64_encode($signature ."-". $hash ."-". $idGen);
-	echo "]</h4>";
+	echo "]</pre></h4>";
 	echo "</h3>Refresh the page to start using Ticker!</h3>";
 }
 
